@@ -200,8 +200,13 @@ function initMotion() {
   if (hasGsap) {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero load sequence: arch rises open, headline lines stagger, meta fades
-    const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    // Hero load sequence: arch rises open, headline lines stagger, meta fades.
+    // If the intro overlay is up, hold this until the Welcome button dismisses it.
+    const introActive = document.documentElement.classList.contains("intro-active");
+    const heroTl = gsap.timeline({ defaults: { ease: "power3.out" }, paused: introActive });
+    if (introActive) {
+      document.addEventListener("ps:intro-done", () => heroTl.play(), { once: true });
+    }
     if (document.querySelector(".hero-arch")) {
       gsap.set(".hero-arch", { clipPath: "inset(100% 0% 0% 0% round 999px 999px 20px 20px)" });
       heroTl.to(".hero-arch", { clipPath: "inset(0% 0% 0% 0% round 999px 999px 20px 20px)", duration: 1.2 }, 0.15);

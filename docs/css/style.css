@@ -624,6 +624,88 @@ h1, h2, h3, .display {
 .page-hero .eyebrow { display: block; margin-bottom: var(--space-2); }
 .page-hero p { max-width: 38rem; color: var(--muted); margin-top: var(--space-2); }
 
+/* ---------- Intro title sequence ---------- */
+.intro-overlay {
+  position: fixed; inset: 0; z-index: 120;
+  background: var(--ink);
+  display: grid; place-items: center;
+  clip-path: inset(0% 0% 0% 0%);
+}
+/* Grain on the intro too — it sits above the page's grain layer */
+.intro-overlay::after {
+  content: "";
+  position: absolute; inset: -50%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.045;
+}
+body.intro-lock { overflow: hidden; }
+
+.intro-saltire {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0.32;
+}
+.intro-saltire line {
+  stroke: var(--gold); stroke-width: 0.35;
+  vector-effect: non-scaling-stroke;
+}
+
+.intro-stage {
+  position: relative; z-index: 1;
+  width: min(60rem, 100% - 3rem);
+  display: grid; place-items: center;
+  text-align: center;
+}
+.intro-beat { grid-area: 1 / 1; }
+
+.intro-display {
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  line-height: 0.95;
+}
+.intro-display .intro-line { display: block; overflow: hidden; }
+.intro-display .intro-line > span { display: block; }
+.intro-caption {
+  margin-top: 1.4rem;
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  color: var(--muted);
+}
+
+.intro-words { position: relative; display: grid; place-items: center; }
+.intro-word {
+  grid-area: 1 / 1;
+  font-family: var(--serif); font-style: italic; font-weight: 500;
+  font-size: clamp(2.4rem, 6.5vw, 5rem);
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.intro-lockup { display: grid; place-items: center; gap: 0.9rem; }
+.intro-brand {
+  font-family: var(--display); text-transform: uppercase;
+  font-size: clamp(2.6rem, 7vw, 5.5rem); line-height: 1;
+}
+.intro-brand .pepper { color: var(--green-bright); }
+.intro-brand-sub {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.42em; text-transform: uppercase;
+  color: var(--gold);
+}
+.intro-serif {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: var(--muted);
+}
+.intro-welcome { margin-top: 1.4rem; padding: 1.05rem 3.2rem; }
+
+/* While the intro is up, hold the hero's pieces hidden so nothing flashes */
+.intro-active .hero-title .line > span,
+.intro-active .hero .eyebrow,
+.intro-active .hero-lede,
+.intro-active .hero-actions,
+.intro-active .hero-meta,
+.intro-active .hero-scroll-hint,
+.intro-active .est-badge { visibility: hidden; }
+
 /* ---------- Reveal animations (GSAP enhances; CSS is the fallback) ---------- */
 .reveal { opacity: 0; transform: translateY(28px); }
 .no-js .reveal, .no-motion .reveal { opacity: 1; transform: none; }
