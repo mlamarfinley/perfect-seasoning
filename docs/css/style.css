@@ -641,46 +641,24 @@ h1, h2, h3, .display {
 }
 body.intro-lock { overflow: hidden; }
 
-.intro-saltire {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  opacity: 0.32;
+.intro-bg { position: absolute; inset: 0; }
+.intro-bg img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(1.15) contrast(1.06) brightness(0.9);
 }
-.intro-saltire line {
-  stroke: var(--gold); stroke-width: 0.35;
-  vector-effect: non-scaling-stroke;
+.intro-scrim {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(60% 46% at 50% 50%, rgba(23, 21, 18, 0.68), transparent 72%),
+    linear-gradient(180deg, rgba(23, 21, 18, 0.6) 0%, rgba(23, 21, 18, 0.42) 45%, rgba(23, 21, 18, 0.82) 100%);
 }
 
-.intro-stage {
+.intro-lockup {
   position: relative; z-index: 1;
-  width: min(60rem, 100% - 3rem);
-  display: grid; place-items: center;
+  display: grid; place-items: center; gap: 0.9rem;
   text-align: center;
+  width: min(46rem, 100% - 3rem);
 }
-.intro-beat { grid-area: 1 / 1; }
-
-.intro-display {
-  font-size: clamp(3rem, 9vw, 7.5rem);
-  line-height: 0.95;
-}
-.intro-display .intro-line { display: block; overflow: hidden; }
-.intro-display .intro-line > span { display: block; }
-.intro-caption {
-  margin-top: 1.4rem;
-  font-family: var(--serif); font-style: italic;
-  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-  color: var(--muted);
-}
-
-.intro-words { position: relative; display: grid; place-items: center; }
-.intro-word {
-  grid-area: 1 / 1;
-  font-family: var(--serif); font-style: italic; font-weight: 500;
-  font-size: clamp(2.4rem, 6.5vw, 5rem);
-  color: var(--gold);
-  white-space: nowrap;
-}
-
-.intro-lockup { display: grid; place-items: center; gap: 0.9rem; }
 .intro-brand {
   font-family: var(--display); text-transform: uppercase;
   font-size: clamp(2.6rem, 7vw, 5.5rem); line-height: 1;
